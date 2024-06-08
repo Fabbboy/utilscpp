@@ -6,6 +6,16 @@ A collection of useful C++ classes and functions.
 
 Keeping it as generic as possible, so it easily adapts to any project. Currently there are no `CC` that needs to be compiled, just include the header files and you are good to go.
 
+### Utils
+
+#### Classes
+
+- `Result` - Class that holds 2 generics, a value and an error. It is used to return a value and an error at the same time.
+
+#### Macros
+
+- `UCPP_IMPLEMENTS` - Macro that checks if a class implements a specific method.
+
 ### Installation
 
 #### Using git
