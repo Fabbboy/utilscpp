@@ -11,7 +11,6 @@ include_directories(include)
 file(GLOB_RECURSE SOURCES "src/*.cc")
 file(GLOB_RECURSE HEADERS "include/*.hh")
 
-# if sources are available, then add them to the library
 if(SOURCES)
   add_library(utilcpp ${SOURCES})
   target_include_directories(utilcpp PUBLIC include)
