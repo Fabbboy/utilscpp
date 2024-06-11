@@ -7,25 +7,16 @@
 
 namespace ucpp {
 Logger::Logger() {
-  const char *env = std::getenv(UCPP_LOGGER_ENV);
-  if (env) {
-    std::string env_str(env);
-    switch (env_str[0]) {
-    case '0':
-      m_level = LogLevel::LL_DESABLED;
-      break;
-    case '1':
-      m_level = LogLevel::LL_DEBUG;
-      break;
-    default:
-      std::cerr << "Invalid log level: " << env_str << std::endl;
-      break;
-    }
-  }
-
+  m_level = get_log_level();
   m_handler = __def_stdio_handler;
   m_device = OuputDevice::OD_STDIO;
 }
+
+Logger::Logger(OuputDevice device, LogHandler handler) {
+  m_level = get_log_level();
+  m_device = device;
+  m_handler = handler;
+};
 
 void Logger::debug(const std::string &msg, ...) {
   if (m_level != LogLevel::LL_DEBUG) {
