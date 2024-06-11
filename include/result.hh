@@ -2,7 +2,6 @@
 #define UCPP_RESULT_HPP
 
 #include <stdexcept>
-#include <type_traits>
 #include <utility>
 
 namespace ucpp {
