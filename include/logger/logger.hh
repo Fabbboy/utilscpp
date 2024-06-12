@@ -8,12 +8,21 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 
 namespace ucpp {
 enum class OuputDevice { OD_STDIO, OD_FSTREAM, OD_CUSTOM };
-enum class LogLevel { LL_DISABLED, LL_DEBUG, LL_COUNT };
+enum class LogLevel {
+  LL_DISABLED,
+  LL_DEBUG,
+  LL_WARNING,
+  LL_ERROR,
+  LL_FATAL,
+  LL_COUNT
+};
+std::ostream &operator<<(std::ostream &os, const LogLevel &lg);
 using LogHandler = void (*)(const std::string &);
 
 static inline void __def_stdio_handler(const std::string &msg) {
@@ -47,7 +56,7 @@ private:
     return static_cast<LogLevel>(level);
   }
 
-  inline std::string get_timestamp() const {
+  static inline std::string get_timestamp() {
     std::string format = "%Y-%m-%dT%H:%M:%S";
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
@@ -58,29 +67,16 @@ private:
 
 public:
   Logger(std::string logger = "DefaultLogger");
-  Logger(OuputDevice device, LogHandler handler = __def_stdio_handler);
+  Logger(std::string logger, LogLevel level,
+         OuputDevice device = OuputDevice::OD_STDIO,
+         LogHandler handler = __def_stdio_handler);
 
   void set_log_level(LogLevel level) { m_level = level; }
   void set_name(const std::string &name) { m_logger = name; }
-  // logger
-  void debug(const std::string &msg);
-};
 
+  void log(const std::string &msg);
+  void log(const char *msg);
+};
 } // namespace ucpp
 
-#ifndef UCPP_DISABLE_MACROS
-extern ucpp::Logger global_logger;
-#define UCPP_LEVEL(level)                                                      \
-  setenv(UCPP_LOGGER_ENV,                                                      \
-         std::to_string(static_cast<unsigned int>(level)).c_str(), 1);         \
-  global_logger.set_log_level(level);
-#define UCPP_SETDEF(name) global_logger.set_name(name)
-#define UCPP_DEBUG(msg) global_logger.debug(msg)
-#else
-#define UCPP_LEVEL(level)                                                      \
-  setenv(UCPP_LOGGER_ENV,                                                      \
-         std::to_string(static_cast<unsigned int>(level)).c_str(), 1)
-#define UCPP_DEBUG(msg, ...)
-#define UCPP_SETDEF(name)
-#endif
 #endif
