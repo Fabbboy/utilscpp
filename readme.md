@@ -12,6 +12,8 @@ Keeping it as generic as possible, so it easily adapts to any project. Currently
 
 - `Result` - Class that holds 2 generics, a value and an error. It is used to return a value and an error at the same time.
 
+- `Logger` - Class that is responsible for handling all kinds of logs with diffrent outcomes. You can freely define your own handle if you dont want to use our builtin: `stdio` and `fstream`
+
 #### Macros
 
 - `UCPP_IMPLEMENTS` - Macro that checks if a class implements a specific method.
@@ -29,8 +31,3 @@ git clone https://github.com/Fabbboy/utilcpp
 ```bash
 git submodule add https://github.com/Fabbboy/utilcpp
 ```
-
-#### Alternative
-
-**As long as there is no compilation needed:**
-Just copy the header files you need to your project.
