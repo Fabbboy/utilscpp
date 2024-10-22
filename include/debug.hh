@@ -4,6 +4,7 @@
 #define PRAGMA(desc) _Pragma(#desc)
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
+#define COMPTIME_ERR(msg) PRAGMA(GCC error msg)
 
 #ifdef DEBUG_MODE
 #define DEBUG(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
