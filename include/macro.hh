@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 #include <cstdio>
 #include <cstdlib>
+#include <memory>
 #define THROW(msg, ...)                                                        \
   do {                                                                         \
     int size = std::snprintf(nullptr, 0, msg, __VA_ARGS__) + 1;                \
