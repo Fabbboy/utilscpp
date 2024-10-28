@@ -7,6 +7,8 @@
 #define COMPTIME_ERR(msg) PRAGMA(GCC error msg)
 #define UNREACHABLE()                                                          \
   THROW("Reached unreachable code in %s:%d", __FILE__, __LINE__)
+#define NOT_IMPLEMENTED(msg)                                                   \
+  THROW("Not implemented: %s:%d: %s", __FILE__, __LINE__, msg)
 
 #ifdef __cplusplus
 #include <cstdio>
