@@ -1,11 +1,14 @@
-#ifndef __UTILSCPP_RESULT_HH__
-#define __UTILSCPP_RESULT_HH__
+#ifndef __COMMONC_RESULT_HH__
+#define __COMMONC_RESULT_HH__
 
 #include <optional>
 #include <stdexcept>
 #include <variant>
 
-namespace utilscpp {
+#include "../macro.hh"
+
+#if IS_CPP
+namespace commonc {
 struct ValueTag {};
 struct ErrorTag {};
 
@@ -68,6 +71,7 @@ class Result<void, E> {
     throw std::runtime_error("No error present");
   }
 };
-}  // namespace utilscpp
+}  // namespace commonc
+#endif
 
-#endif  // __UTILSCPP_RESULT_HH__
+#endif  // __COMMONC_RESULT_HH__

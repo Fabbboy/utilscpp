@@ -1,8 +1,11 @@
-#ifndef __UTILSCPP_MEMORY_HH__
-#define __UTILSCPP_MEMORY_HH__
+#ifndef __COMMONC_MEMORY_HH__
+#define __COMMONC_MEMORY_HH__
 
+#include "../macro.hh"
+
+#if IS_CPP
 #include <memory>
-
+namespace commonc {
 template <typename T>
 using Box = std::unique_ptr<T>;
 template <typename T>
@@ -23,5 +26,7 @@ template <typename T, typename... Args>
 constexpr Ref<T> make_ref(Args&&... args) {
   return std::make_shared<T>(std::forward<Args>(args)...);
 }
+}  // namespace commonc
+#endif
 
 #endif

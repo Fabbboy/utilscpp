@@ -1,5 +1,5 @@
-#ifndef __UTILSCPP_DEBUG_HH__
-#define __UTILSCPP_DEBUG_HH__
+#ifndef __COMMONC_DEBUG_HH__
+#define __COMMONC_DEBUG_HH__
 
 #include "macro.hh"
 
@@ -23,4 +23,4 @@
 #endif
 #endif
 
-#endif  // __UTILSCPP_DEBUG_HH__
+#endif  // __COMMONC_DEBUG_HH__
